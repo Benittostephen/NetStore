@@ -20,7 +20,7 @@ class NetStore {
       password: password,
       appColor: appColor,
       onTap: onTap,
-      getStartscreenImage:image
+      image:image
     );
   }
 }
