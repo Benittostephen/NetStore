@@ -10,6 +10,7 @@ class LoginScreen extends StatefulWidget {
   const LoginScreen(
       {super.key,
       required this.title,
+      required this.onTap,
       required this.email,
       required this.password,
       required this.appColor});
@@ -18,6 +19,7 @@ class LoginScreen extends StatefulWidget {
   final String email;
   final String password;
   final Color appColor;
+  final void Function(String title, String category) onTap;
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -84,8 +86,13 @@ class _LoginScreenState extends State<LoginScreen> {
       });
       if (emailController.text == widget.email &&
           passwordController.text == widget.password) {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => GetStartedScreen(butColor: widget.appColor)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => GetStartedScreen(
+                      butColor: widget.appColor,
+                      onTap: widget.onTap,
+                    )));
         emailController.clear();
         passwordController.clear();
         ScaffoldMessenger.of(context)

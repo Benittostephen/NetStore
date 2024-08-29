@@ -5,8 +5,10 @@ import 'business_screen.dart';
 
 class GetStartedScreen extends StatelessWidget {
   final Color butColor;
+    final void Function(String title, String category) onTap;
 
-  const GetStartedScreen({super.key, required this.butColor});
+
+  const GetStartedScreen({super.key, required this.butColor,required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class GetStartedScreen extends StatelessWidget {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => BusinessScreen(color: butColor)));
+              builder: (context) => BusinessScreen(color: butColor,onTap: onTap,)));
     }
 
     return Scaffold(
