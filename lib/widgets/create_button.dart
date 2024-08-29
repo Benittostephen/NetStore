@@ -4,7 +4,7 @@ class CreateButton extends StatelessWidget {
   final Color color;
   final String title;
   final String? category;
-  final Function(String title, String category) onTap;
+  final Function onTap;
 
   const CreateButton({
     super.key,
@@ -22,7 +22,9 @@ class CreateButton extends StatelessWidget {
       //   },
       child: InkWell(
         //borderRadius: BorderRadius.circular(5),
-        onTap: () => onTap(title, category!),
+        onTap: () {
+          onTap();
+        },
         splashFactory: InkRipple.splashFactory,
         splashColor: Colors.white.withOpacity(0.1),
         child: Ink(
