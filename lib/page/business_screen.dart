@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/choose_category_button.dart';
 import '../widgets/create_button.dart';
-import '../widgets/dropdown_button.dart';
 import 'category_screen.dart';
 
 final _formKey1 = GlobalKey<FormState>();
@@ -53,7 +53,7 @@ class _BusinessScreenState extends State<BusinessScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   children: [
-                    Image.asset('assets/store.png', scale: 1.4),
+                    Icon(Icons.storefront, size: 24),
                     SizedBox(width: 5),
                     Text('Business title')
                   ],
@@ -68,7 +68,7 @@ class _BusinessScreenState extends State<BusinessScreen> {
               SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: DropdownTextField(
+                child: ChooseCategory(
                   label: _selectedCategory ?? 'Choose Category',
                   onTap: () async {
                     final result = await Navigator.push(

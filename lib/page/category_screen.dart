@@ -16,10 +16,7 @@ class CategoryScreen extends StatelessWidget {
       appBar: AppBar(
         titleSpacing: 0,
         leading: IconButton(
-          icon: Image.asset(
-            'assets/back.png',
-            height: 17,
-          ),
+          icon: Icon(Icons.arrow_back_ios_new, size: 24.0),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -37,15 +34,18 @@ class CategoryScreen extends StatelessWidget {
               ListTile(
                 title: Center(
                     child: Text(
-                      categories[index],
-                      style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500),
-                    )),
+                  categories[index],
+                  style: TextStyle(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFFF686868)),
+                )),
                 onTap: () {
                   Navigator.pop(context, categories[index]);
                 },
               ),
               Divider(
-                color: Colors.grey, // Color of the line
+                color: Color(0xFFFD4D4D4), // Color of the line
                 thickness: 1.0, // Thickness of the line
                 height: 0,
               ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class DropdownTextField extends StatelessWidget {
+class ChooseCategory extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
 
-  const DropdownTextField({
+  const ChooseCategory({
     required this.label,
     required this.onTap,
   });
@@ -20,14 +20,6 @@ class DropdownTextField extends StatelessWidget {
             borderSide: BorderSide(
               color: Color(0xFFFC6C6C6), // Change this to your desired color
               width: 1.0,
-            ),
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5.0),
-            borderSide: BorderSide(
-              color: Colors.grey,
-              // Change this to your desired color when disabled
-              width: 2.0,
             ),
           ),
           contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
