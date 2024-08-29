@@ -9,15 +9,17 @@ final _formKey1 = GlobalKey<FormState>();
 class LoginScreen extends StatefulWidget {
   const LoginScreen(
       {super.key,
-        required this.title,
-        required this.email,
-        required this.password,
-        required this.appColor});
+      required this.title,
+      required this.onTap,
+      required this.email,
+      required this.password,
+      required this.appColor});
 
   final String title;
   final String email;
   final String password;
   final Color appColor;
+  final void Function(String title, String category) onTap;
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -84,8 +86,13 @@ class _LoginScreenState extends State<LoginScreen> {
       });
       if (emailController.text == widget.email &&
           passwordController.text == widget.password) {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => GetStartedScreen()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => GetStartedScreen(
+                      butColor: widget.appColor,
+                      onTap: widget.onTap,
+                    )));
         emailController.clear();
         passwordController.clear();
         ScaffoldMessenger.of(context)
@@ -106,94 +113,94 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                height: 250,
-                color:widget.appColor,
-                child:  Center(
-                  child: Text(
-                    widget.title,
-                    style: TextStyle(
-                        fontSize: 55,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height: 250,
+              color: widget.appColor,
+              child: Center(
+                child: Text(
+                  widget.title,
+                  style: TextStyle(
+                      fontSize: 55,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
               ),
-              Padding(
-                padding:
-                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 40),
-                child: Form(
-                  key: _formKey1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Login to your Account',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(height: 10),
-                      _mytextfield(false, emailController, 'Email',
-                          _validateEmail, false),
-                      SizedBox(height: 20),
-                      _mytextfield(_obscureText, passwordController, 'Password',
-                          _validatePassword, true),
-                      SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          GestureDetector(
-                              onTap: () {},
-                              child: Text(
-                                'Forgot your Password?',
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                    fontSize: 12, color: Color(0xFFF5B5B5B)),
-                              )),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 40),
+              child: Form(
+                key: _formKey1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Login to your Account',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(height: 10),
+                    _mytextfield(
+                        false, emailController, 'Email', _validateEmail, false),
+                    SizedBox(height: 20),
+                    _mytextfield(_obscureText, passwordController, 'Password',
+                        _validatePassword, true),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                            onTap: () {},
+                            child: Text(
+                              'Forgot your Password?',
+                              textAlign: TextAlign.end,
+                              style: TextStyle(
+                                  fontSize: 12, color: Color(0xFFF5B5B5B)),
+                            )),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    (_isLoading)
+                        ? CircularProgressIndicator(
+                            // color: primaryColor,
+                            )
+                        : Center(
+                            child: MyButton(
+                              onTap: _login,
+                              color: widget.appColor,
+                              buName: 'Continue',
+                            ),
+                          ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        text: 'By continuing, You agree to our ',
+                        style: TextStyle(color: Colors.black, fontSize: 10),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Terms and Conditions and Privacy Policy',
+                            style: TextStyle(
+                              color: Color(0xFF009688), // Link color
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                // Add your onTap logic here
+                              },
+                          ),
                         ],
                       ),
-                      SizedBox(height: 10),
-                      (_isLoading)
-                          ? CircularProgressIndicator(
-                        // color: primaryColor,
-                      )
-                          : Center(
-                        child: LoginButton(
-                            onTap: _login,color: widget.appColor
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          text: 'By continuing, You agree to our ',
-                          style: TextStyle(color: Colors.black, fontSize: 10),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: 'Terms and Conditions and Privacy Policy',
-                              style: TextStyle(
-                                color: Color(0xFF009688), // Link color
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  // Add your onTap logic here
-                                },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -209,14 +216,14 @@ class _LoginScreenState extends State<LoginScreen> {
           fillColor: Color(0xFFFf5f5f5),
           suffixIcon: passwordController.text.isNotEmpty
               ? (prefixicon)
-              ? IconButton(
-              icon: Icon(
-                size: 18,
-                color: Colors.grey,
-                _obscureText ? Icons.visibility_off : Icons.visibility,
-              ),
-              onPressed: _togglePasswordVisibility)
-              : null
+                  ? IconButton(
+                      icon: Icon(
+                        size: 18,
+                        color: Colors.grey,
+                        _obscureText ? Icons.visibility_off : Icons.visibility,
+                      ),
+                      onPressed: _togglePasswordVisibility)
+                  : null
               : null,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
