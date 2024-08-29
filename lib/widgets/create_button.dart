@@ -1,28 +1,38 @@
 import 'package:flutter/material.dart';
 
-class MyButton extends StatelessWidget {
-  final onTap;
+class CreateButton extends StatelessWidget {
   final Color color;
-  final String buName;
-  const MyButton({super.key,required this.onTap,required this.color,required this.buName});
+  final String title;
+  final String? category;
+  final Function(String title, String category) onTap;
+
+  const CreateButton({
+    super.key,
+    required this.color,
+    required this.title,
+    required this.category,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      // onTap: (titile,categroy) {
+      //
+      //   },
       child: InkWell(
-        borderRadius: BorderRadius.circular(5),
-        onTap: onTap,
+        //borderRadius: BorderRadius.circular(5),
+        onTap: () => onTap(title, category!),
         splashFactory: InkRipple.splashFactory,
         splashColor: Colors.white.withOpacity(0.1),
         child: Ink(
-            height: 50,
+            height: 70,
             decoration: BoxDecoration(
               color: color,
-              borderRadius: BorderRadius.circular(5),
             ),
             child: Center(
               child: Text(
-                buName,
+                'Create',
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
@@ -31,5 +41,6 @@ class MyButton extends StatelessWidget {
             )),
       ),
     );
+    ;
   }
 }

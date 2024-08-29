@@ -9,10 +9,10 @@ final _formKey1 = GlobalKey<FormState>();
 class LoginScreen extends StatefulWidget {
   const LoginScreen(
       {super.key,
-        required this.title,
-        required this.email,
-        required this.password,
-        required this.appColor});
+      required this.title,
+      required this.email,
+      required this.password,
+      required this.appColor});
 
   final String title;
   final String email;
@@ -85,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (emailController.text == widget.email &&
           passwordController.text == widget.password) {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => GetStartedScreen()));
+            MaterialPageRoute(builder: (context) => GetStartedScreen(butColor: widget.appColor)));
         emailController.clear();
         passwordController.clear();
         ScaffoldMessenger.of(context)
@@ -112,8 +112,8 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             Container(
               height: 250,
-              color:widget.appColor,
-              child:  Center(
+              color: widget.appColor,
+              child: Center(
                 child: Text(
                   widget.title,
                   style: TextStyle(
@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Padding(
               padding:
-              const EdgeInsets.symmetric(horizontal: 30.0, vertical: 40),
+                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 40),
               child: Form(
                 key: _formKey1,
                 child: Column(
@@ -137,8 +137,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
                     SizedBox(height: 10),
-                    _mytextfield(false, emailController, 'Email',
-                        _validateEmail, false),
+                    _mytextfield(
+                        false, emailController, 'Email', _validateEmail, false),
                     SizedBox(height: 20),
                     _mytextfield(_obscureText, passwordController, 'Password',
                         _validatePassword, true),
@@ -159,13 +159,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: 10),
                     (_isLoading)
                         ? CircularProgressIndicator(
-                      // color: primaryColor,
-                    )
+                            // color: primaryColor,
+                            )
                         : Center(
-                      child: LoginButton(
-                          onTap: _login,color: widget.appColor
-                      ),
-                    ),
+                            child: MyButton(
+                              onTap: _login,
+                              color: widget.appColor,
+                              buName: 'Continue',
+                            ),
+                          ),
                     SizedBox(
                       height: 10,
                     ),
@@ -207,14 +209,14 @@ class _LoginScreenState extends State<LoginScreen> {
           fillColor: Color(0xFFFf5f5f5),
           suffixIcon: passwordController.text.isNotEmpty
               ? (prefixicon)
-              ? IconButton(
-              icon: Icon(
-                size: 18,
-                color: Colors.grey,
-                _obscureText ? Icons.visibility_off : Icons.visibility,
-              ),
-              onPressed: _togglePasswordVisibility)
-              : null
+                  ? IconButton(
+                      icon: Icon(
+                        size: 18,
+                        color: Colors.grey,
+                        _obscureText ? Icons.visibility_off : Icons.visibility,
+                      ),
+                      onPressed: _togglePasswordVisibility)
+                  : null
               : null,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
