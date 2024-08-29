@@ -35,7 +35,7 @@ class GetStartedScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        'assets/create.png',
+                        'assets/create.jpg',
                         height: 200,
                         width: 200,
                       ),

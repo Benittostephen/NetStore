@@ -22,7 +22,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/create.png
+     - assets/create.jpg
 
   #   - images/a_dot_ham.jpeg
   #
