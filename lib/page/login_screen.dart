@@ -13,12 +13,14 @@ class LoginScreen extends StatefulWidget {
       required this.onTap,
       required this.email,
       required this.password,
-      required this.appColor});
+      required this.appColor,
+      required this.getStartscreenImage});
 
   final String title;
   final String email;
   final String password;
   final Color appColor;
+  final String getStartscreenImage;
   final void Function(String title, String category) onTap;
 
   @override
@@ -92,6 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 builder: (context) => GetStartedScreen(
                       butColor: widget.appColor,
                       onTap: widget.onTap,
+                  image:widget.getStartscreenImage
                     )));
         emailController.clear();
         passwordController.clear();

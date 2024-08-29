@@ -12,13 +12,15 @@ class NetStore {
       required String email,
       required String password,
       required Color appColor,
-      required void Function(String title, String category) onTap}) {
+      required void Function(String title, String category) onTap,
+      required String image}) {
     return LoginScreen(
       title: title,
       email: email,
       password: password,
       appColor: appColor,
       onTap: onTap,
+      getStartscreenImage:image
     );
   }
 }

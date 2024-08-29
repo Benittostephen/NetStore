@@ -120,8 +120,21 @@ class _BusinessScreenState extends State<BusinessScreen> {
               // ),
               // Alternatively, use the custom CreateButton widget if needed
               CreateButton(
-                onTap: () =>
-                    widget.onTap(titleController.text, _selectedCategory ?? ''),
+                onTap: () {
+                  if (_formKey1.currentState!.validate()) {
+                    if (_selectedCategory != null) {
+                      widget.onTap(
+                          titleController.text, _selectedCategory ?? '');
+                    } else {
+                      // Handle case where category is not selected
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Please select a category'),
+                        ),
+                      );
+                    }
+                  }
+                },
                 category: _selectedCategory ?? '',
                 title: titleController.text,
                 color: widget.color,

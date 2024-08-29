@@ -5,10 +5,14 @@ import 'business_screen.dart';
 
 class GetStartedScreen extends StatelessWidget {
   final Color butColor;
-    final void Function(String title, String category) onTap;
+  final String image;
+  final void Function(String title, String category) onTap;
 
-
-  const GetStartedScreen({super.key, required this.butColor,required this.onTap});
+  const GetStartedScreen(
+      {super.key,
+      required this.butColor,
+      required this.onTap,
+      required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -16,48 +20,51 @@ class GetStartedScreen extends StatelessWidget {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => BusinessScreen(color: butColor,onTap: onTap,)));
+              builder: (context) => BusinessScreen(
+                    color: butColor,
+                    onTap: onTap,
+                  )));
     }
 
     return Scaffold(
         body: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 350,
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(
-                      color: Colors.white, borderRadius: BorderRadius.circular(50)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/create.jpg',
-                        height: 200,
-                        width: 200,
-                      ),
-                      SizedBox(height: 40),
-                      Text(
-                        'Create your first store',
-                        style:
-                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.w700),
-                      ),
-                      Text(
-                        'You haven’t created any store',
-                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
-                      )
-                    ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 350,
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(50)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    image,
+                    height: 200,
+                    width: 200,
                   ),
-                ),
-                SizedBox(height: 70),
-                MyButton(
-                    buName: 'Get Started', color: butColor, onTap: _getStarted),
-              ],
+                  SizedBox(height: 40),
+                  Text(
+                    'Create your first store',
+                    style:
+                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.w700),
+                  ),
+                  Text(
+                    'You haven’t created any store',
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
+                  )
+                ],
+              ),
             ),
-          ),
-        ));
+            SizedBox(height: 70),
+            MyButton(
+                buName: 'Get Started', color: butColor, onTap: _getStarted),
+          ],
+        ),
+      ),
+    ));
   }
 }
