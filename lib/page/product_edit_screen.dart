@@ -62,6 +62,8 @@ class _EditProductState extends State<EditProduct> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        shadowColor: Colors.white,
+        elevation: 1.0,
         backgroundColor: Colors.white,
         titleSpacing: 5,
         leading: IconButton(
