@@ -27,13 +27,13 @@ flutter:
 
 # To add assets to your package, add an assets section, like this:
   assets:
-    - assets/create.png
-    - assets/edit.png
-    - assets/rupee.png
-    - assets/document.png
-    - assets/video.png
-    - assets/youtube.png
-    - assets/gallery.png
+#    - assets/images/create.png
+    - assets/images/edit.png
+    - assets/images/rupee.png
+    - assets/images/document.png
+    - assets/images/video.png
+    - assets/images/youtube.png
+    - assets/images/gallery.png
 #   - images/a_dot_ham.jpeg
 #   - images/a_dot_ham.jpeg
 #
