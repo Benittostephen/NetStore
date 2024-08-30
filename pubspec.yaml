@@ -10,11 +10,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  file_picker: ^8.1.2
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -23,8 +26,14 @@ dev_dependencies:
 flutter:
 
 # To add assets to your package, add an assets section, like this:
-# assets:
-#   - images/a_dot_burr.jpeg
+  assets:
+    - lib/assets/images/create.png
+    - lib/assets/images/edit.png
+    - lib/assets/images/rupee.png
+    - lib/assets/images/document.png
+    - lib/assets/images/video.png
+    - lib/assets/images/youtube.png
+    - lib/assets/images/gallery.png
 #   - images/a_dot_ham.jpeg
 #   - images/a_dot_ham.jpeg
 #
