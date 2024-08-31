@@ -17,12 +17,12 @@ class NetStore {
       required void Function(String title, String category) onTap,
       required String image}) {
     return LoginScreen(
-        title: title,
-        email: email,
-        password: password,
-        appColor: appColor,
-        onTap: onTap,
-        image: image);
+      title: title,
+      email: email,
+      password: password,
+      appColor: appColor,
+      onTap: onTap,
+    );
   }
 
   static EditProduct editProduct({required Color color}) {

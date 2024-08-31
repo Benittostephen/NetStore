@@ -5,14 +5,13 @@ import 'business_screen.dart';
 
 class GetStartedScreen extends StatelessWidget {
   final Color butColor;
-  final String image;
   final void Function(String title, String category) onTap;
 
   const GetStartedScreen(
       {super.key,
       required this.butColor,
       required this.onTap,
-      required this.image});
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +41,7 @@ class GetStartedScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    image,
+                    'packages/netstore/assets/create.png',
                     height: 200,
                     width: 200,
                   ),
