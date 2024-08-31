@@ -2,11 +2,11 @@ library net_store;
 
 import 'dart:ui';
 
-import 'package:netstore/page/login_screen.dart';
-import 'package:netstore/page/product_edit_screen.dart';
+import 'package:net_store/page/login_screen.dart';
+import 'package:net_store/page/product_edit_screen.dart';
 
-export 'package:netstore/page/login_screen.dart';
-export 'package:netstore/page/product_edit_screen.dart';
+export 'package:net_store/page/login_screen.dart';
+export 'package:net_store/page/product_edit_screen.dart';
 
 class NetStore {
   static LoginScreen homePage(

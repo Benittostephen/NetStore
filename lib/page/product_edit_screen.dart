@@ -110,7 +110,7 @@ class _EditProductState extends State<EditProduct> {
                         fit: BoxFit.cover,
                       )
                     : Image.asset(
-                        'packages/netstore/assets/gallery.png',
+                        'packages/net_store/assets/gallery.png',
                         scale: 2,
                       )),
             const SizedBox(height: 10),
@@ -149,7 +149,7 @@ class _EditProductState extends State<EditProduct> {
                               ),
                             )
                           : Image.asset(
-                              'packages/netstore/assets/gallery.png',
+                              'packages/net_store/assets/gallery.png',
                               scale: 15,
                             ),
                     ),
@@ -185,7 +185,7 @@ class _EditProductState extends State<EditProduct> {
               child: Row(
                 children: [
                   Image.asset(
-                    'packages/netstore/assets/edit.png',
+                    'packages/net_store/assets/edit.png',
                     height: 15,
                   ),
                   const SizedBox(width: 5),
@@ -252,7 +252,7 @@ class _EditProductState extends State<EditProduct> {
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Row(
                 children: [
-                  Image.asset('packages/netstore/assets/rupee.png',
+                  Image.asset('packages/net_store/assets/rupee.png',
                       height: 19, color: Colors.grey.shade800),
                   const SizedBox(width: 5),
                   Text('Price',
@@ -382,7 +382,7 @@ class _EditProductState extends State<EditProduct> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: Row(children: [
-                Image.asset('packages/netstore/assets/document.png',
+                Image.asset('packages/net_store/assets/document.png',
                     height: 15, color: Colors.grey.shade800),
                 const SizedBox(width: 5),
                 Text('Description',
@@ -390,7 +390,7 @@ class _EditProductState extends State<EditProduct> {
                         fontWeight: FontWeight.w500,
                         color: Colors.grey.shade800)),
                 const Spacer(),
-                Image.asset('packages/netstore/assets/edit.png',
+                Image.asset('packages/net_store/assets/edit.png',
                     height: 15, color: Colors.grey.shade800)
               ]),
             ),
@@ -462,11 +462,11 @@ class _EditProductState extends State<EditProduct> {
               child: Row(
                 children: [
                   Image.asset(
-                    'packages/netstore/assets/video.png',
+                    'packages/net_store/assets/video.png',
                     height: 20,
                   ),
                   Image.asset(
-                    'packages/netstore/assets/youtube.png',
+                    'packages/net_store/assets/youtube.png',
                     height: 20,
                   )
                 ],

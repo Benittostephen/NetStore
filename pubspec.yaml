@@ -1,4 +1,4 @@
-name: netstore
+name: net_store
 description: "A new Flutter package project."
 version: 0.0.1
 homepage:
@@ -28,13 +28,13 @@ flutter:
   # To add assets to your package, add an assets section, like this:
   assets:
     #    - assets/images/create.png
-    - packages/netstore/assets/create.png
-    - packages/netstore/assets/edit.png
-    - packages/netstore/assets/rupee.png
-    - packages/netstore/assets/document.png
-    - packages/netstore/assets/video.png
-    - packages/netstore/assets/youtube.png
-    - packages/netstore/assets/gallery.png
+    - packages/net_store/assets/create.png
+    - packages/net_store/assets/edit.png
+    - packages/net_store/assets/rupee.png
+    - packages/net_store/assets/document.png
+    - packages/net_store/assets/video.png
+    - packages/net_store/assets/youtube.png
+    - packages/net_store/assets/gallery.png
 #   - images/a_dot_ham.jpeg
 #   - images/a_dot_ham.jpeg
 #
