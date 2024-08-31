@@ -15,7 +15,7 @@ class NetStore {
       required String password,
       required Color appColor,
       required void Function(String title, String category) onTap,
-      required String image}) {
+      }) {
     return LoginScreen(
       title: title,
       email: email,
