@@ -7,14 +7,14 @@ import 'getstarted_screen.dart';
 final _formKey1 = GlobalKey<FormState>();
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen(
-      {super.key,
-      required this.title,
-      required this.onTap,
-      required this.email,
-      required this.password,
-      required this.appColor,
-      });
+  const LoginScreen({
+    super.key,
+    required this.title,
+    required this.onTap,
+    required this.email,
+    required this.password,
+    required this.appColor,
+  });
 
   final String title;
   final String email;
