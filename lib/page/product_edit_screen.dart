@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:file_picker/file_picker.dart';
 
+
 class EditProduct extends StatefulWidget {
   final Color color;
 
@@ -59,19 +60,21 @@ class _EditProductState extends State<EditProduct> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.teal.shade50,
       appBar: AppBar(
         shadowColor: Colors.white,
         elevation: 1.0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.teal.shade50,
         titleSpacing: 5,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            // Handle back button action
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back_ios_new),
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        // ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -101,327 +104,362 @@ class _EditProductState extends State<EditProduct> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-                width: double.maxFinite,
-                height: 300,
-                child: _imageFile != null
-                    ? Image.file(
-                        _imageFile!,
-                        fit: BoxFit.cover,
-                      )
-                    : Image.asset(
-                        'packages/net_store/assets/gallery.png',
-                        scale: 2,
+            SizedBox(height: 10),
+            Stack(alignment: Alignment.bottomRight, children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    // color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)),
+                  height: height * 0.22,
+                  child: Center(
+                      child: Container(
+                        width: width * 0.4,
+                        height: height * 0.18,
+                        decoration: BoxDecoration(
+                          color: Colors.white, // Light background color
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: _imageFile != null
+                            ? ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.file(
+                            _imageFile!,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                            : Icon(
+                          Icons.broken_image_outlined,
+                          size: 110,
+                          color: Colors.black,
+                        ),
                       )),
+                ),
+              ),
+              Positioned(
+                bottom: height * 0.01,
+                right: width * 0.26,
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.teal,
+                    borderRadius:
+                    BorderRadius.circular(50), // Custom rounded corners
+                  ),
+                  child: IconButton(
+                    onPressed: _pickImage,
+                    icon: Icon(Icons.add, color: Colors.white, size: 25),
+                  ),
+                ),
+              ),
+            ]),
             const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  // Main image button
-                  GestureDetector(
-                    onTap: _pickImage,
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              // Shadow color
-                              spreadRadius: 1,
-                              // Spread radius
-                              blurRadius: 3,
-                              // Blur radius
-                              offset: const Offset(0, 2)),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius:
+                  BorderRadius.circular(10), // Custom rounded corners
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/edit.png',
+                            height: 15,
+                          ),
+                          const SizedBox(width: 5),
+                          Text(
+                            'Product Name',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey.shade800),
+                          )
                         ],
                       ),
-                      child: _imageFile != null
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              // Same as the container's border radius
-                              child: Image.file(
-                                _imageFile!,
-                                fit: BoxFit.cover,
-                              ),
-                            )
-                          : Image.asset(
-                              'packages/net_store/assets/gallery.png',
-                              scale: 15,
-                            ),
-                    ),
-                  ),
-                  // Overlay camera button
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: InkWell(
-                      onTap: _pickImage,
-                      child: Container(
-                        width: 25,
-                        height: 25,
-                        decoration: BoxDecoration(
-                            color: widget.color,
-                            borderRadius: const BorderRadius.only(
-                                bottomRight: Radius.circular(10),
-                                topLeft: Radius.circular(10))),
-                        child: const Icon(
-                          Icons.camera_alt,
-                          color: Colors.white,
-                          size: 16,
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          productName,
+                          style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF2f518c)),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: Row(
-                children: [
-                  Image.asset(
-                    'packages/net_store/assets/edit.png',
-                    height: 15,
-                  ),
-                  const SizedBox(width: 5),
-                  Text(
-                    'Product Name',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey.shade800),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Text(
-                productName,
-                style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF2f518c)),
-              ),
-            ),
-            const SizedBox(height: 15),
-            Row(
-              children: [
-                Expanded(
-                    child: Container(
-                  height: 5,
-                  color: Colors.grey.shade200,
-                )),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: const BorderRadius.horizontal(
-                          left: Radius.circular(50))),
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 3.0, horizontal: 10),
-                      child: RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Product views ',
-                              style: TextStyle(
-                                fontSize: 11,
-                                color: Colors.grey.shade600,
-                              ),
-                            ),
-                            TextSpan(
-                              text: '$productViews',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF2f518c),
-                                  fontSize:
-                                      15), // Change this to your desired color
-                            ),
-                          ],
-                        ),
-                      )),
-                )
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
-                children: [
-                  Image.asset('packages/net_store/assets/rupee.png',
-                      height: 19, color: Colors.grey.shade800),
-                  const SizedBox(width: 5),
-                  Text('Price',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey.shade800))
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(
-                'Preview',
-                style: TextStyle(
-                  color: Colors.grey.shade600,
                 ),
               ),
             ),
+            // const SizedBox(height: 15),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              padding:
+              const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  // Icon(Icons.currency_rupee,size: 20,),
-                  Text(
-                    '₹$productPrice',
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF2f518c),
-                        fontSize: 20), // Change this to your desired color
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Product views ',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: Colors.grey.shade600,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '$productViews',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF2f518c),
+                              fontSize:
+                              15), // Change this to your desired color
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 80),
+            // Row(
+            //   children: [
+            //     Expanded(
+            //         child: Container(
+            //       height: 5,
+            //       color: Colors.grey.shade200,
+            //     )),
+            //     Container(
+            //       decoration: BoxDecoration(
+            //           color: Colors.grey.shade200,
+            //           borderRadius: const BorderRadius.horizontal(
+            //               left: Radius.circular(50))),
+            //     )
+            //   ],
+            // ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                          child: Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Text(
-                          'Selling Price*',
-                          style: TextStyle(
-                            color: Colors.grey.shade600,
-                          ),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Row(
+                        children: [
+                          Image.asset('assets/rupee.png',
+                              height: 19, color: Colors.grey.shade800),
+                          const SizedBox(width: 5),
+                          Text('Price',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.grey.shade800))
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        'Preview',
+                        style: TextStyle(
+                          color: Colors.grey.shade600,
                         ),
-                      )),
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.currency_rupee,
-                                  size: 16,
-                                  color: Colors.grey.shade800,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Row(
+                        children: [
+                          // Icon(Icons.currency_rupee,size: 20,),
+                          Text(
+                            '₹$productPrice',
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF2f518c),
+                                fontSize:
+                                20), // Change this to your desired color
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 80),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Text(
+                                      'Selling Price*',
+                                      style: TextStyle(
+                                        color: Colors.grey.shade600,
+                                      ),
+                                    ),
+                                  )),
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.shade200,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.currency_rupee,
+                                          size: 16,
+                                          color: Colors.grey.shade800,
+                                        ),
+                                        Text(
+                                          '$productPrice',
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.grey.shade800),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                                Text(
-                                  '$productPrice',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.grey.shade800),
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Text(
+                                      'MRP',
+                                      style: TextStyle(
+                                        color: Colors.grey.shade600,
+                                      ),
+                                    ),
+                                  )),
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.shade200,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.currency_rupee,
+                                            size: 16,
+                                            color: Colors.grey.shade800),
+                                        Text(
+                                          '$productPrice',
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.grey.shade800),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                              ],
-                            ),
+                              )
+                            ],
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                          child: Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Text(
-                          'MRP',
-                          style: TextStyle(
-                            color: Colors.grey.shade600,
-                          ),
-                        ),
-                      )),
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Row(
-                              children: [
-                                Icon(Icons.currency_rupee,
-                                    size: 16, color: Colors.grey.shade800),
-                                Text(
-                                  '$productPrice',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.grey.shade800),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                ],
+                          const SizedBox(height: 20),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            Container(
-              height: 5,
-              color: Colors.grey.shade200,
-            ),
+            // Container(
+            //   height: 5,
+            //   color: Colors.grey.shade200,
+            // ),
+            SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(children: [
-                Image.asset('packages/net_store/assets/document.png',
-                    height: 15, color: Colors.grey.shade800),
-                const SizedBox(width: 5),
-                Text('Description',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey.shade800)),
-                const Spacer(),
-                Image.asset('packages/net_store/assets/edit.png',
-                    height: 15, color: Colors.grey.shade800)
-              ]),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: _buildDescriptionField(),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.0)),
+                child: Column(
+                  children: [
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Row(children: [
+                        Image.asset('assets/document.png',
+                            height: 15, color: Colors.grey.shade800),
+                        const SizedBox(width: 5),
+                        Text('Description',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey.shade800)),
+                        const Spacer(),
+                        Image.asset('assets/edit.png',
+                            height: 15, color: Colors.grey.shade800)
+                      ]),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: _buildDescriptionField(),
+                    ),
+                  ],
+                ),
+              ),
             ),
             const SizedBox(height: 10),
-            _buildYouTubeField(),
-            Container(
-              height: 125,
-              color: Colors.grey.shade200,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.keyboard_arrow_up_outlined,
-                      color: Colors.grey.shade500,
-                      size: 35,
-                    ),
-                    Text(
-                      'Nothing more to show',
-                      style: TextStyle(
-                          color: Colors.grey.shade500,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Text('Add more info to your content to attract customers',
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: _buildYouTubeField(),
+            ),
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(10.0)),
+                height: 125,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.keyboard_arrow_up_outlined,
+                        color: Colors.grey.shade500,
+                        size: 35,
+                      ),
+                      Text(
+                        'Nothing more to show',
                         style: TextStyle(
-                            color: Colors.grey.shade500, fontSize: 12))
-                  ],
+                            color: Colors.grey.shade500,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      Text('Add more info to your content to attract customers',
+                          style: TextStyle(
+                              color: Colors.grey.shade500, fontSize: 12))
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -437,20 +475,22 @@ class _EditProductState extends State<EditProduct> {
       maxLines: 3,
       decoration: InputDecoration(
         hintText: "Describe your content here...",
-        hintStyle: const TextStyle(color: Colors.grey, fontSize: 15),
-        filled: true,
-        fillColor: Colors.grey[200],
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
-          borderSide: BorderSide.none,
-        ),
+        // hintStyle: const TextStyle(color: Colors.grey, fontSize: 15),
+        // filled: true,
+        // fillColor: Colors.grey[200],
+        // border: OutlineInputBorder(
+        //   borderRadius: BorderRadius.circular(8.0),
+        //   borderSide: BorderSide.none,
+        // ),
       ),
     );
   }
 
   Widget _buildYouTubeField() {
     return Container(
-      color: Colors.grey.shade800,
+      decoration: BoxDecoration(
+          color: Colors.grey.shade800,
+          borderRadius: BorderRadius.circular(10.0)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Column(
@@ -458,15 +498,15 @@ class _EditProductState extends State<EditProduct> {
           children: [
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
+              const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
               child: Row(
                 children: [
                   Image.asset(
-                    'packages/net_store/assets/video.png',
+                    'assets/video.png',
                     height: 20,
                   ),
                   Image.asset(
-                    'packages/net_store/assets/youtube.png',
+                    'assets/youtube.png',
                     height: 20,
                   )
                 ],
@@ -483,12 +523,12 @@ class _EditProductState extends State<EditProduct> {
             TextFormField(
               controller: _controller,
               decoration: InputDecoration(
-                filled: true,
-                fillColor: const Color(0xFFf5f5f5),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                  borderSide: BorderSide.none,
-                ),
+                // filled: true,
+                // fillColor: const Color(0xFFf5f5f5),
+                // border: OutlineInputBorder(
+                //   borderRadius: BorderRadius.circular(5.0),
+                //   borderSide: BorderSide.none,
+                // ),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                 hintText: 'Paste your YouTube video link here',
                 hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
@@ -537,7 +577,8 @@ class _EditProductState extends State<EditProduct> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           itemBut(
-              () {}, 'Preview', Icons.remove_red_eye, const Color(0xFFfbc02d)),
+                  () {}, 'Preview', Icons.remove_red_eye,
+              const Color(0xFFfbc02d)),
           itemBut(() {}, 'Promote', Icons.campaign, const Color(0xFF284b88)),
           itemBut(() {}, 'Share', Icons.share, const Color(0xFF075e54)),
         ],
